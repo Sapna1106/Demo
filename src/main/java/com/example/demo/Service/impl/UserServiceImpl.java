@@ -27,6 +27,7 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
+import org.springframework.retry.support.RetrySynchronizationManager;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -201,7 +202,7 @@ public class UserServiceImpl implements IUserService {
     @Retryable(value = NullPointerException.class, maxAttempts = 4, backoff = @Backoff(delay = 2000))
     public User saveUser(User user) {
         try {
-//            log.info("Retry Number : {}", RetrySynchronizationManager.getContext().getRetryCount());
+            log.info("Retry Number : {}", RetrySynchronizationManager.getContext().getRetryCount());
             return userRepository.save(user);
         } catch (Exception e) {
             throw e;
