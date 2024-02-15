@@ -11,5 +11,5 @@ public interface IUserService {
     public ByteArrayOutputStream createSelfDeclaration() throws DocumentException, IOException;
     public ByteArrayOutputStream createPdf() throws Exception;
     public User saveUser(User user);
-    public ByteArrayOutputStream setImage() throws Exception;
+//    public ByteArrayOutputStream setImage() throws Exception;
 }

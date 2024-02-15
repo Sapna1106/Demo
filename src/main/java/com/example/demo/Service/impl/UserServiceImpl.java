@@ -13,7 +13,7 @@ import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfArray;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfDictionary;
-import com.itextpdf.text.pdf.PdfDocument;
+//import com.itextpdf.text.pdf.PdfDocument;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
@@ -28,7 +28,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.retry.support.RetrySynchronizationManager;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -167,36 +166,36 @@ public class UserServiceImpl implements IUserService {
 
     }
 
-    public ByteArrayOutputStream setImage() throws Exception {
-        PdfReader pdfReader = new PdfReader(new ClassPathResource("EKYCAuthImage.pdf").getInputStream());
-        ByteArrayOutputStream outputFile = new ByteArrayOutputStream();
-        PdfStamper pdfStamper = new PdfStamper(pdfReader, outputFile);
-        pdfStamper.setFullCompression();
-        AcroFields form = pdfStamper.getAcroFields();
-
-        File file = new File("EKYCAuthImage.pdf");
-        PDDocument doc = PDDocument.load(file);
-        PDPage page = doc.getPage(1);
-
-        PDImageXObject pdImage = PDImageXObject.createFromFile("customer_photo.PNG", doc);
-        String imageFieldName = "Image_af_image";
-        String imageUrl = String.valueOf(new ClassPathResource("customer_photo.PNG").getURL());
-        Image image = Image.getInstance(imageUrl);
-        PdfDictionary fieldDict = form.getFieldItem(imageFieldName).getMerged(0);
-        PdfArray rectArray = fieldDict.getAsArray(PdfName.RECT);
-        float xPosition = rectArray.getAsNumber(0).floatValue();
-        float yPosition = rectArray.getAsNumber(1).floatValue();
-        float width = rectArray.getAsNumber(2).floatValue() - xPosition;
-        float height = rectArray.getAsNumber(3).floatValue() - yPosition;
-
-        image.setAbsolutePosition(xPosition, yPosition + 50);
-        image.scaleAbsolute(width, height);
-
-        PDPageContentStream contents = new PDPageContentStream(doc, page);
-        contents.drawImage(pdImage, xPosition, 300);
-        contents.close();
-        return null;
-    }
+//    public ByteArrayOutputStream setImage() throws Exception {
+//        PdfReader pdfReader = new PdfReader(new ClassPathResource("EKYCAuthImage.pdf").getInputStream());
+//        ByteArrayOutputStream outputFile = new ByteArrayOutputStream();
+//        PdfStamper pdfStamper = new PdfStamper(pdfReader, outputFile);
+//        pdfStamper.setFullCompression();
+//        AcroFields form = pdfStamper.getAcroFields();
+//
+//        File file = new File("EKYCAuthImage.pdf");
+//        PDDocument doc = PDDocument.load(file);
+//        PDPage page = doc.getPage(1);
+//
+//        PDImageXObject pdImage = PDImageXObject.createFromFile("customer_photo.PNG", doc);
+//        String imageFieldName = "Image_af_image";
+//        String imageUrl = String.valueOf(new ClassPathResource("customer_photo.PNG").getURL());
+//        Image image = Image.getInstance(imageUrl);
+//        PdfDictionary fieldDict = form.getFieldItem(imageFieldName).getMerged(0);
+//        PdfArray rectArray = fieldDict.getAsArray(PdfName.RECT);
+//        float xPosition = rectArray.getAsNumber(0).floatValue();
+//        float yPosition = rectArray.getAsNumber(1).floatValue();
+//        float width = rectArray.getAsNumber(2).floatValue() - xPosition;
+//        float height = rectArray.getAsNumber(3).floatValue() - yPosition;
+//
+//        image.setAbsolutePosition(xPosition, yPosition + 50);
+//        image.scaleAbsolute(width, height);
+//
+//        PDPageContentStream contents = new PDPageContentStream(doc, page);
+//        contents.drawImage(pdImage, xPosition, 300);
+//        contents.close();
+//        return null;
+//    }
 
     @Override
     @Retryable(value = NullPointerException.class, maxAttempts = 4, backoff = @Backoff(delay = 2000))

@@ -44,20 +44,20 @@ public class UserController {
         return ResponseEntity.ok(user1);
     }
 
-    @PostMapping(value = "/setImage", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<byte[]> setImage() throws Exception {
-        ByteArrayOutputStream outputStream = userService.setImage();
+//    @PostMapping(value = "/setImage", produces = MediaType.APPLICATION_PDF_VALUE)
+//    public ResponseEntity<byte[]> setImage() throws Exception {
+//        ByteArrayOutputStream outputStream = userService.setImage();
+//
+//        return ResponseEntity.ok(outputStream.toByteArray());
+//    }
 
-        return ResponseEntity.ok(outputStream.toByteArray());
-    }
-
-    @PostMapping("/getResponse")
-    public ResponseEntity<CoResponse<String>> getResponse(){
-
-        CoResponse<String> coResponse = new CoResponse<>();
-        String var = "Hello";
-        coResponse.setData(var);
-        coResponse.setStatus(HttpStatus.OK);
-        return ResponseEntity.ok(coResponse);
-    }
+//    @PostMapping("/getResponse")
+//    public ResponseEntity<CoResponse<String>> getResponse(){
+//
+//        CoResponse<String> coResponse = new CoResponse<>();
+//        String var = "Hello";
+//        coResponse.setData(var);
+//        coResponse.setStatus(HttpStatus.OK);
+//        return ResponseEntity.ok(coResponse);
+//    }
 }
