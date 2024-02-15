@@ -11,14 +11,14 @@ import java.util.List;
 @Service
 public class StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
-
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
-    }
-
-    public Student saveStudent(Student student) {
-        return studentRepository.save(student);
-    }
+//    @Autowired
+//    private StudentRepository studentRepository;
+//
+//    public List<Student> getAllStudents() {
+//        return studentRepository.findAll();
+//    }
+//
+//    public Student saveStudent(Student student) {
+//        return studentRepository.save(student);
+//    }
 }
